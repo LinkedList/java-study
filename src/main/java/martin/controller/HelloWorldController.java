@@ -29,6 +29,11 @@ public class HelloWorldController {
 	@Value("#{props['folder']}")
 	private String folder;
 	
+	@RequestMapping(value="/")
+	public String index() {
+		return "index";
+	}
+	
 	/**
 	 * Basic hello world route
 	 * @param model ui Model with registered name
