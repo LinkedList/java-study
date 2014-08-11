@@ -11,5 +11,6 @@
 <body>
 	<h1>Error 404</h1>
 	<h2>This page doesn't exist.. Sorry :)</h2>
+	<img src="<c:url value="/resources/img/failwhale.jpg" />" />
 </body>
 </html>
