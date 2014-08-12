@@ -7,7 +7,7 @@
 <t:wrapper>
 	<h1>This is a list bean</h1>
 	<ul>
-		<c:forEach var="str" items="${bean.getList()}" >
+		<c:forEach var="str" items="${bean.list}" >
 			<li>${str}</li>
 		</c:forEach>
 	</ul>

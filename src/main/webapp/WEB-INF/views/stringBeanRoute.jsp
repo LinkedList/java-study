@@ -5,5 +5,5 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page isELIgnored="false" %>
 <t:wrapper>
-	<p> This text is from a bean: ${bean.getText() }</p>
+	<p> This text is from a bean: ${bean.text}</p>
 </t:wrapper>

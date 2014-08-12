@@ -5,5 +5,5 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@ page isELIgnored="false" %>
 <t:wrapper>
-	<p> This date is from a bean: ${bean.getDate().toString() }</p>
+	<p> This date is from a bean: ${bean.date}</p>
 </t:wrapper>
