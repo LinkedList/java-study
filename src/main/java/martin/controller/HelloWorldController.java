@@ -6,6 +6,7 @@ import java.io.InputStream;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
+import martin.beans.DateBean;
 import martin.beans.StringBean;
 
 import org.apache.commons.io.IOUtils;
@@ -63,6 +64,11 @@ public class HelloWorldController {
 		return "helloworld";
 	}
 	
+	/**
+	 * Route that loads a StringBean and displays its contents
+	 * @param model Model with stringBean
+	 * @return view stringBeanRoute
+	 */
 	@RequestMapping(value="/stringBeanRoute")
 	public String stringBeanRoute(Model model) {
 		ac = new ClassPathXmlApplicationContext(
@@ -72,6 +78,21 @@ public class HelloWorldController {
 		
 		model.addAttribute("bean", stringBean);
 		return "stringBeanRoute";
+	}
+	
+	/**
+	 * Route that loads a DateBean and displays current time
+	 * @param model Model with dateBean
+	 * @return view dateBeanRoute
+	 */
+	@RequestMapping(value="/dateBeanRoute")
+	public String dateBeanRoute(Model model) {
+		ac = new ClassPathXmlApplicationContext(
+				"beans.xml");
+		
+		DateBean dateBean = (DateBean) ac.getBean("dateBean");
+		model.addAttribute("bean", dateBean);
+		return "dateBeanRoute";
 	}
 	
 	/**
