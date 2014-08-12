@@ -7,6 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import martin.beans.DateBean;
+import martin.beans.ListBean;
 import martin.beans.StringBean;
 
 import org.apache.commons.io.IOUtils;
@@ -95,6 +96,21 @@ public class HelloWorldController {
 		return "dateBeanRoute";
 	}
 	
+	/**
+	 * Route that loads a DateBean and displays current time
+	 * @param model Model with dateBean
+	 * @return view dateBeanRoute
+	 */
+	@RequestMapping(value="/listBeanRoute")
+	public String listBeanRoute(Model model) {
+		ac = new ClassPathXmlApplicationContext(
+				"beans.xml");
+		
+		ListBean listBean = (ListBean) ac.getBean("listBean");
+		model.addAttribute("bean", listBean);
+		return "listBeanRoute";
+	}
+
 	/**
 	 * Get requested jpg image
 	 * @param name filename of the image

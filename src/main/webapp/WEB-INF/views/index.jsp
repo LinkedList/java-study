@@ -20,5 +20,6 @@
 				jpg</a></li>
 		<li><a href="<c:url value="/stringBeanRoute" />">StringBeanRoute</a></li>
 		<li><a href="<c:url value="/dateBeanRoute" />">DateBeanRoute</a></li>
+		<li><a href="<c:url value="/listBeanRoute" />">ListBeanRoute</a></li>
 	</ul>
 </t:wrapper>

@@ -15,5 +15,14 @@
 		</property>
 	</bean>
 
+	<bean id="listBean" class="martin.beans.ListBean">
+		<property name="list">
+			<list>
+				<value>First value</value>
+				<value>Second value</value>
+				<value>Third value</value>
+			</list>
+		</property>
+	</bean>
 
 </beans>
