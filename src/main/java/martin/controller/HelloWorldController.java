@@ -97,9 +97,9 @@ public class HelloWorldController {
 	}
 	
 	/**
-	 * Route that loads a DateBean and displays current time
-	 * @param model Model with dateBean
-	 * @return view dateBeanRoute
+	 * Route that loads a ListBean and displays it's contents
+	 * @param model Model with listBean
+	 * @return view listBeanRoute
 	 */
 	@RequestMapping(value="/listBeanRoute")
 	public String listBeanRoute(Model model) {
