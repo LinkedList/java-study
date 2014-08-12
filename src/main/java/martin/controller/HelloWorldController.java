@@ -6,9 +6,13 @@ import java.io.InputStream;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
+import martin.beans.StringBean;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -28,6 +32,8 @@ public class HelloWorldController {
 	 */
 	@Value("#{props['folder']}")
 	private String folder;
+
+	private ApplicationContext ac;
 	
 	@RequestMapping(value="/")
 	public String index() {
@@ -55,6 +61,17 @@ public class HelloWorldController {
 	public String helloVar(@PathVariable("name") String name, Model model) {
 		model.addAttribute("name", name);
 		return "helloworld";
+	}
+	
+	@RequestMapping(value="/stringBeanRoute")
+	public String stringBeanRoute(Model model) {
+		ac = new ClassPathXmlApplicationContext(
+				"beans.xml");
+
+		StringBean stringBean = (StringBean) ac.getBean("stringBean");
+		
+		model.addAttribute("bean", stringBean);
+		return "stringBeanRoute";
 	}
 	
 	/**

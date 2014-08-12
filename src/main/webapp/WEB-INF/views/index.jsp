@@ -18,5 +18,6 @@
 				route - 404</a></li>
 		<li><a href="<c:url value="/resources/img/failwhale.jpg" />">Static
 				jpg</a></li>
+		<li><a href="<c:url value="/stringBeanRoute" />">StringBeanRoute</a></li>
 	</ul>
 </t:wrapper>
