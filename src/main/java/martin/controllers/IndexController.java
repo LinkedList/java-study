@@ -1,4 +1,4 @@
-package martin.controller;
+package martin.controllers;
 
 import javax.servlet.ServletContext;
 
@@ -32,7 +32,7 @@ public class IndexController {
 	
 	@RequestMapping(value="/")
 	public String index() {
-		return "index";
+		return "index/index";
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class IndexController {
 	@RequestMapping(value="/hello")
 	public String hello(Model model) {
 		model.addAttribute("name", "World!");
-		return "helloworld";
+		return "index/helloworld";
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class IndexController {
 	@RequestMapping(value="/hello/{name}")
 	public String helloVar(@PathVariable("name") String name, Model model) {
 		model.addAttribute("name", name);
-		return "helloworld";
+		return "index/helloworld";
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class IndexController {
 		StringBean stringBean = (StringBean) appctx.getBean("stringBean");
 		
 		model.addAttribute("bean", stringBean);
-		return "stringBeanView";
+		return "index/stringBeanView";
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class IndexController {
 		
 		DateBean dateBean = (DateBean) appctx.getBean("dateBean");
 		model.addAttribute("bean", dateBean);
-		return "dateBeanView";
+		return "index/dateBeanView";
 	}
 	
 	/**
@@ -101,8 +101,7 @@ public class IndexController {
 		
 		ListBean listBean = (ListBean) appctx.getBean("listBean");
 		model.addAttribute("bean", listBean);
-		return "listBeanView";
+		return "index/listBeanView";
 	}
-
 	
 }
