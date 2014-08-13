@@ -1,5 +1,6 @@
 package martin.controllers;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -49,16 +50,16 @@ public class ImageController {
 					.getResourceAsStream(filename);
 			return IOUtils.toByteArray(in);
 		} else {
-			throw new IOException("File doesn't exist");
+			throw new FileNotFoundException("File doesn't exist");
 		}
 	}
 	
 	/**
-	 * Exception handler for IOException
-	 * @return fileDoesntExist view
+	 * Exception handler for FileNotFoundException
+	 * @return fileNotFound view
 	 */
-	@ExceptionHandler({IOException.class})
-	public String ioExceptionHandler() {
-		return "exceptions/fileDoesntExist";
+	@ExceptionHandler({FileNotFoundException.class})
+	public String fileNotFoundExceptionHandler() {
+		return "exceptions/fileNotFound";
 	}
 }
