@@ -7,7 +7,6 @@ import martin.beans.ListBean;
 import martin.beans.StringBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -21,12 +20,6 @@ public class IndexController {
 	
 	@Autowired
 	private ServletContext servletctx;
-
-	/**
-	 * Folder that will be used for /image/ route
-	 */
-	@Value("#{props['folder']}")
-	private String folder;
 
 	private ApplicationContext appctx;
 	
