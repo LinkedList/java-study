@@ -7,7 +7,7 @@
 <%@ page isELIgnored="false"%>
 <t:wrapper>
 	<h1>Index page</h1>
-	<ul>
+	<ul class="nav nav-pills nav-stacked">
 		<li><a href="<c:url value="/hello" />">Hello World</a></li>
 		<li><a href="<c:url value="/hello/Martin" />">Hello Martin</a></li>
 		<li><a href="<c:url value="/image/lol" />">Image route with
