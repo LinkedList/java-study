@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/resources/css/bootstrap.min.css" />">
 <link rel="stylesheet" type="text/css"
-	href="<c:url value="/resources/css/docs.min.css" />">
+	href="<c:url value="/resources/css/main.css" />">
 </head>
 <body>
 	<header class="navbar navbar-static-top bs-docs-nav" id="top"
@@ -36,9 +36,7 @@
 			</nav>
 		</div>
 	</header>
-	<div class="container">
 		<jsp:doBody />
-	</div>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="<c:url value="/resources/js/bootstrap.min.js" />"></script>

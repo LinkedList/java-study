@@ -1,0 +1,13 @@
+.bs-docs-nav .navbar-toggle .icon-bar {
+	background-color: #563d7c;
+}
+
+.jumbotron {
+	background-image: url("../img/welcome.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 0;
+    padding-bottom:0px;
+    padding-top: 37.86%;
+}
