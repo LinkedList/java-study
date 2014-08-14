@@ -25,6 +25,7 @@
 			<nav class="collapse navbar-collapse bs-navbar-collapse"
 				role="navigation">
 				<ul class="nav navbar-nav">
+					<li><a href="<c:url value="/users/" />">Users</a></li>
 					<li><a href="#">Something</a></li>
 					<li><a href="#">will</a></li>
 					<li><a href="#">be</a></li>

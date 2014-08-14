@@ -1,12 +1,9 @@
 package martin.controllers;
 
-import javax.servlet.ServletContext;
-
 import martin.beans.DateBean;
 import martin.beans.ListBean;
 import martin.beans.StringBean;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -18,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/")
 public class IndexController {
 	
-	@Autowired
-	private ServletContext servletctx;
-
 	private ApplicationContext appctx;
 	
 	@RequestMapping(value="/")

@@ -25,4 +25,14 @@
 		</property>
 	</bean>
 
+	<!-- Database beans -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+	</bean>
+	
+	<bean id="userDao" class="martin.models.UserDaoImpl">
+		<property name="sessFactory" ref="sessionFactory" />
+	</bean>
+
 </beans>
