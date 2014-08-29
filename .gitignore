@@ -8,3 +8,7 @@ pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
 release.properties
+nb-configuration.xml
+nbactions.xml
+src/main/webapp/META-INF/
+lib/
