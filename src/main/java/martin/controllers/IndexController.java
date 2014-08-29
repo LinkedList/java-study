@@ -3,9 +3,8 @@ package martin.controllers;
 import martin.beans.DateBean;
 import martin.beans.ListBean;
 import martin.beans.StringBean;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value="/")
 public class IndexController {
 	
+	@Autowired
 	private ApplicationContext appctx;
 	
 	@RequestMapping(value="/")
@@ -52,9 +52,6 @@ public class IndexController {
 	 */
 	@RequestMapping(value="/stringBeanRoute")
 	public String stringBeanRoute(Model model) {
-		appctx = new ClassPathXmlApplicationContext(
-				"beans.xml");
-
 		StringBean stringBean = (StringBean) appctx.getBean("stringBean");
 		
 		model.addAttribute("bean", stringBean);
@@ -68,9 +65,6 @@ public class IndexController {
 	 */
 	@RequestMapping(value="/dateBeanRoute")
 	public String dateBeanRoute(Model model) {
-		appctx = new ClassPathXmlApplicationContext(
-				"beans.xml");
-		
 		DateBean dateBean = (DateBean) appctx.getBean("dateBean");
 		model.addAttribute("bean", dateBean);
 		return "index/dateBeanView";
@@ -83,9 +77,6 @@ public class IndexController {
 	 */
 	@RequestMapping(value="/listBeanRoute")
 	public String listBeanRoute(Model model) {
-		appctx = new ClassPathXmlApplicationContext(
-				"beans.xml");
-		
 		ListBean listBean = (ListBean) appctx.getBean("listBean");
 		model.addAttribute("bean", listBean);
 		return "index/listBeanView";
