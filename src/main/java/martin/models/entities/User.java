@@ -1,4 +1,4 @@
-package martin.models;
+package martin.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

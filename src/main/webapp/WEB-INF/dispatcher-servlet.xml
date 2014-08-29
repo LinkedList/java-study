@@ -10,7 +10,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
-	<context:component-scan base-package="martin.controllers" />
+	<context:component-scan base-package="martin" />
 
 	<util:properties id="props" location="classpath:config.properties" />
 	<bean

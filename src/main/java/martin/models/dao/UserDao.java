@@ -1,5 +1,6 @@
-package martin.models;
+package martin.models.dao;
 
+import martin.models.entities.User;
 import java.util.List;
 
 public interface UserDao {
