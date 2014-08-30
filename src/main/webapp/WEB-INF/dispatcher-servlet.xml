@@ -22,6 +22,14 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 			<value>.jsp</value>
 		</property>
 	</bean>
+        
+        <!-- Database beans -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="configLocation" value="classpath:hibernate.cfg.xml" />
+                <property name="packagesToScan" value="martin.models.entities" />
+	</bean>
+        
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:annotation-driven />
 </beans>

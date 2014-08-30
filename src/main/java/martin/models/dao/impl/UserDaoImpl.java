@@ -7,20 +7,14 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository("userDao")
 public class UserDaoImpl implements UserDao {
 
+        @Autowired
 	private SessionFactory sessFactory;
-
-	public SessionFactory getSessFactory() {
-		return sessFactory;
-	}
-
-	public void setSessFactory(SessionFactory sessFactory) {
-		this.sessFactory = sessFactory;
-	}
 
 	@Override
 	public List<User> findAll() {
