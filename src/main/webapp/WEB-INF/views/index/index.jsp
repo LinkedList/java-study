@@ -23,9 +23,7 @@
 					route - 404</a></li>
 			<li><a href="<c:url value="/resources/img/failwhale.jpg" />">Static
 					jpg</a></li>
-			<li><a href="<c:url value="/stringBeanRoute" />">StringBeanRoute</a></li>
-			<li><a href="<c:url value="/dateBeanRoute" />">DateBeanRoute</a></li>
-			<li><a href="<c:url value="/listBeanRoute" />">ListBeanRoute</a></li>
+			<li><a href="<c:url value="/viewModelTest" />">View Model Test</a></li>
 		</ul>
 	</div>
 </t:wrapper>
