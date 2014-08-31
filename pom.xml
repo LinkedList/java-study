@@ -49,13 +49,6 @@
             <version>${org.postgresql.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <type>jar</type>
-        </dependency>
-
         <!-- Core utilities used by other modules. Define this if you use Spring
         Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
         <dependency>
@@ -115,6 +108,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
             <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
     </dependencies>
 

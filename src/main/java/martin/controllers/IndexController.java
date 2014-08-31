@@ -1,8 +1,6 @@
 package martin.controllers;
 
-import martin.beans.DateBean;
-import martin.beans.ListBean;
-import martin.beans.StringBean;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -46,40 +44,15 @@ public class IndexController {
 	}
 	
 	/**
-	 * Route that loads a StringBean and displays its contents
+	 * View model route with different things passed to a view
 	 * @param model Model with stringBean
 	 * @return view stringBeanRoute
 	 */
-	@RequestMapping(value="/stringBeanRoute")
-	public String stringBeanRoute(Model model) {
-		StringBean stringBean = (StringBean) appctx.getBean("stringBean");
-		
-		model.addAttribute("bean", stringBean);
-		return "index/stringBeanView";
+	@RequestMapping(value="/viewModelTest")
+	public String viewModelTest(Model model) {
+		model.addAttribute("string", "This is a string");
+		model.addAttribute("date", new Date());
+		model.addAttribute("list", new String[] {"apple", "banana", "orange"});
+		return "index/viewModelTest";
 	}
-	
-	/**
-	 * Route that loads a DateBean and displays current time
-	 * @param model Model with dateBean
-	 * @return view dateBeanRoute
-	 */
-	@RequestMapping(value="/dateBeanRoute")
-	public String dateBeanRoute(Model model) {
-		DateBean dateBean = (DateBean) appctx.getBean("dateBean");
-		model.addAttribute("bean", dateBean);
-		return "index/dateBeanView";
-	}
-	
-	/**
-	 * Route that loads a ListBean and displays it's contents
-	 * @param model Model with listBean
-	 * @return view listBeanRoute
-	 */
-	@RequestMapping(value="/listBeanRoute")
-	public String listBeanRoute(Model model) {
-		ListBean listBean = (ListBean) appctx.getBean("listBean");
-		model.addAttribute("bean", listBean);
-		return "index/listBeanView";
-	}
-	
 }

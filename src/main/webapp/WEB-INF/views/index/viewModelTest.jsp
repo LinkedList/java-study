@@ -7,6 +7,17 @@
 <%@ page isELIgnored="false"%>
 <t:wrapper>
 	<div class="container">
-		<p>This text is from a bean: ${bean.text}</p>
+		<h1>This is a list</h1>
+		<ul>
+			<c:forEach var="str" items="${list}">
+				<li>${str}</li>
+			</c:forEach>
+		</ul>
+
+		<h1>This is a string (obviously)</h1>
+		<div><c:out value="${string}" /></div>
+
+		<h1>This is a date</h1>
+		<div><c:out value="${date}" /></div>
 	</div>
 </t:wrapper>
