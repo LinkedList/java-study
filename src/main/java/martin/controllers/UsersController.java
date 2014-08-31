@@ -80,7 +80,7 @@ public class UsersController {
 		return "users/user";
 	}
 
-/**
+	/**
 	 * Exception handler for FileNotFoundException
 	 * @return fileNotFound view
 	 */
