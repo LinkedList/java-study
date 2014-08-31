@@ -42,6 +42,11 @@ public class UsersController {
 		user.setLogin("ladislav");
 		user.setEmail("ladislav@email.com");
 		userManager.save(user);
+                
+                user = new User();
+		user.setLogin("tomas");
+		user.setEmail("tomas@email.com");
+		userManager.save(user);
 
 		return "redirect:/users/";
 	}
@@ -60,5 +65,14 @@ public class UsersController {
 		userManager.delete(id);
 
 		return "redirect:/users/";
+	}
+
+	@RequestMapping(value="/user/{id}")
+	public String user(@PathVariable("id") Long id, Model model) {
+
+		User user = userManager.findById(id);
+
+		model.addAttribute("user", user);
+		return "users/user";
 	}
 }

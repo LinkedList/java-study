@@ -19,7 +19,7 @@
 			<c:forEach items="${users}" var="user">
 				<tr>
 					<td>${user.id}</td>
-					<td>${user.login}</td>
+					<td><a href="<c:url value="/users/user/${user.id}" />">${user.login}</a></td>
 					<td>${user.email}</td>
 					<td><a href="<c:url value="/users/delete/${user.id}" />">Delete</a></td>
 				</tr>
