@@ -22,7 +22,7 @@ public class UserDaoImpl implements UserDao {
 
 		try {
 
-			Query usersQuery = session.createQuery("from User user");
+			Query usersQuery = session.createQuery("from User user order by user.id");
 			List<User> users = (List<User>) usersQuery.list();
 
 			return users;
