@@ -80,6 +80,17 @@ public class UsersController {
 		return "users/user";
 	}
 
+	@RequestMapping(value = "/user/edit/{id}")
+	public String userEdit(@PathVariable("id") Long id, Model model) throws UserNotFoundException {
+
+		User user = userManager.findById(id);
+
+		if (user == null) {
+			throw new UserNotFoundException();
+		}
+		model.addAttribute("user", user);
+		return "users/userEdit";
+	}
 	/**
 	 * Exception handler for FileNotFoundException
 	 * @return fileNotFound view
