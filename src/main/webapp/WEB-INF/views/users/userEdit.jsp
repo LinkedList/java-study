@@ -9,7 +9,7 @@
 <t:wrapper>
 	<div class="container">
 		<h1>Edit the chosen one!</h1>
-		<form:form method="POST" commandName="user" role="form">
+		<form:form method="POST" commandName="user" role="form" action="${user.id}/save">
 			<div class="form-group">
 				<label for="login">Login:</label>
 				<form:input path="login" class="form-control" id="login" />

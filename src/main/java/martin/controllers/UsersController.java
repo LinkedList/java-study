@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping(value = "/users/")
@@ -22,32 +24,32 @@ public class UsersController {
 		User user = new User();
 		user.setLogin("martin");
 		user.setEmail("martin@email.cz");
-		userManager.save(user);
+		userManager.saveOrUpdate(user);
 
 		user = new User();
 		user.setLogin("anna");
 		user.setEmail("anna@email.com");
-		userManager.save(user);
+		userManager.saveOrUpdate(user);
 
 		user = new User();
 		user.setLogin("honza");
 		user.setEmail("honza@email.com");
-		userManager.save(user);
+		userManager.saveOrUpdate(user);
 
 		user = new User();
 		user.setLogin("marek");
 		user.setEmail("marek@email.com");
-		userManager.save(user);
+		userManager.saveOrUpdate(user);
 
 		user = new User();
 		user.setLogin("ladislav");
 		user.setEmail("ladislav@email.com");
-		userManager.save(user);
+		userManager.saveOrUpdate(user);
 
 		user = new User();
 		user.setLogin("tomas");
 		user.setEmail("tomas@email.com");
-		userManager.save(user);
+		userManager.saveOrUpdate(user);
 
 		return "redirect:/users/";
 	}
@@ -90,6 +92,13 @@ public class UsersController {
 		}
 		model.addAttribute("user", user);
 		return "users/userEdit";
+	}
+
+	@RequestMapping(value = "/user/edit/{id}/save", method=RequestMethod.POST)
+	public String userEditPost(@PathVariable("id") Long id, @ModelAttribute User user, Model model) throws UserNotFoundException {
+		userManager.saveOrUpdate(user);
+
+		return "redirect:/users/user/" + id;
 	}
 	/**
 	 * Exception handler for FileNotFoundException

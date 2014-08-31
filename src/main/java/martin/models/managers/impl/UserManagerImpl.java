@@ -34,8 +34,8 @@ public class UserManagerImpl implements UserManager{
 	}
 
 	@Override
-	public void save(User user) {
-		userDao.save(user);
+	public void saveOrUpdate(User user) {
+		userDao.saveOrUpdate(user);
 	}
 
 	@Override

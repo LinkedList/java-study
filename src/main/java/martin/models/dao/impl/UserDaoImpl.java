@@ -46,14 +46,14 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void save(User user) {
+	public void saveOrUpdate(User user) {
 		final Session session = sessFactory.openSession();
 		try {
 			final Transaction transaction = session.beginTransaction();
 
 			try {
 
-				session.save(user);
+				session.saveOrUpdate(user);
 				transaction.commit();
 
 			} catch (Exception e) {
