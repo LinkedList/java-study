@@ -9,7 +9,9 @@
 <t:wrapper>
 	<div class="container">
 		<h1>Edit the chosen one!</h1>
-		<form:form method="POST" commandName="user" role="form" action="${user.id}/save">
+
+		<c:url var="postUrl" value="/users/user/edit/${user.id}/save" />
+		<form:form method="POST" commandName="user" role="form" action="${postUrl}">
 			<div class="form-group">
 				<label for="login">Login:</label>
 				<form:input path="login" class="form-control" id="login" />

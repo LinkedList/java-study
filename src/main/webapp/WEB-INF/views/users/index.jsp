@@ -25,6 +25,7 @@
 					<td>
 						<div class="btn-group btn-group-xs">
 							<a class="btn btn-primary" href="<c:url value="/users/user/${user.id}" />">Detail</a>
+							<a class="btn btn-default" href="<c:url value="/users/user/edit/${user.id}" />">Edit</a>
 							<a class="btn btn-danger" href="<c:url value="/users/delete/${user.id}" />">Delete</a>
 						</div></td>
 				</tr>
