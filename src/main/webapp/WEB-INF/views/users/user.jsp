@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -7,10 +7,20 @@
 <%@ page isELIgnored="false"%>
 <t:wrapper>
 	<div class="container">
-		<h1>This is the chosen one!</h1>
-		<ul>
-			<li>Name: <c:out value="${user.login}" /></li>
-			<li>Email: <c:out value="${user.email}" /></li>
-		</ul>
+		<h1 class="pull-left">This is the chosen one!</h1>
+		<div class="btn-group pull-right">
+			<a class="btn btn-default" href="<c:url value="/users/user/edit/${user.id}" />">Edit</a>
+			<a class="btn btn-danger" href="<c:url value="/users/delete/${user.id}" />">Delete</a>
+		</div>
+		<table class="table">
+			<tr>
+				<td>Login</td>
+				<td><c:out value="${user.login}" /></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><c:out value="${user.email}" /></td>
+			</tr>
+		</table>
 	</div>
 </t:wrapper>
