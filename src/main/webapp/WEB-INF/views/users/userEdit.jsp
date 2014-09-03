@@ -10,15 +10,17 @@
 	<div class="container">
 		<h1>Edit the chosen one!</h1>
 
-		<c:url var="postUrl" value="/users/user/edit/${user.id}/save" />
+		<c:url var="postUrl" value="/users/user/edit/${user.id}" />
 		<form:form method="POST" commandName="user" role="form" action="${postUrl}">
 			<div class="form-group">
 				<label for="login">Login:</label>
 				<form:input path="login" class="form-control" id="login" />
+				<form:errors path="login" />
 			</div>
 			<div class="form-group">
 				<label for="email">Email:</label>
 				<form:input path="email" class="form-control" id="email" />
+				<form:errors path="email" />
 			</div>
 				<form:button type="submit" value="Save" class="btn btn-primary">Save</form:button>
 		</form:form>

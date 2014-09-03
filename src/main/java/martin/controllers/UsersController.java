@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import javax.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 @Controller
 @RequestMapping(value = "/users/")
@@ -82,7 +84,7 @@ public class UsersController {
 		return "users/user";
 	}
 
-	@RequestMapping(value = "/user/edit/{id}")
+	@RequestMapping(value = "/user/edit/{id}", method=RequestMethod.GET)
 	public String userEdit(@PathVariable("id") Long id, Model model) throws UserNotFoundException {
 
 		User user = userManager.findById(id);
@@ -94,8 +96,11 @@ public class UsersController {
 		return "users/userEdit";
 	}
 
-	@RequestMapping(value = "/user/edit/{id}/save", method=RequestMethod.POST)
-	public String userEditPost(@PathVariable("id") Long id, @ModelAttribute User user, Model model) throws UserNotFoundException {
+	@RequestMapping(value = "/user/edit/{id}", method=RequestMethod.POST)
+	public String userEditPost(@PathVariable("id") Long id, @ModelAttribute @Valid User user, BindingResult result,  Model model) throws UserNotFoundException {
+		if(result.hasErrors()) {
+			return "users/userEdit";
+		}
 		userManager.saveOrUpdate(user);
 
 		return "redirect:/users/user/" + id;
