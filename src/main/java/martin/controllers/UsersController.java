@@ -1,18 +1,19 @@
 package martin.controllers;
 
 import java.util.List;
+import javax.validation.Valid;
 import martin.models.entities.User;
 import martin.models.managers.UserManager;
+import martin.models.seeders.UsersSeeder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import javax.validation.Valid;
-import org.springframework.validation.BindingResult;
 
 @Controller
 @RequestMapping(value = "/users/")
@@ -21,37 +22,13 @@ public class UsersController {
 	@Autowired
 	private UserManager userManager;
 
+	@Autowired
+	private UsersSeeder usersSeeder;
+
 	@RequestMapping(value = "/seeder")
 	public String seeder() {
-		User user = new User();
-		user.setLogin("martin");
-		user.setEmail("martin@email.cz");
-		userManager.saveOrUpdate(user);
-
-		user = new User();
-		user.setLogin("anna");
-		user.setEmail("anna@email.com");
-		userManager.saveOrUpdate(user);
-
-		user = new User();
-		user.setLogin("honza");
-		user.setEmail("honza@email.com");
-		userManager.saveOrUpdate(user);
-
-		user = new User();
-		user.setLogin("marek");
-		user.setEmail("marek@email.com");
-		userManager.saveOrUpdate(user);
-
-		user = new User();
-		user.setLogin("ladislav");
-		user.setEmail("ladislav@email.com");
-		userManager.saveOrUpdate(user);
-
-		user = new User();
-		user.setLogin("tomas");
-		user.setEmail("tomas@email.com");
-		userManager.saveOrUpdate(user);
+		
+		usersSeeder.seed();
 
 		return "redirect:/users/";
 	}
