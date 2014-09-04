@@ -8,6 +8,8 @@
 <t:wrapper>
 	<div class="container">
 		<h1>There shall be all of the users listed here in all their glory</h1>
+		<a class="btn btn-primary" href="<c:url value="/users/seeder" />">Seed me some users please</a>
+		<a class="btn btn-primary" href="<c:url value="/users/user/create" />">Let me create a new one please</a>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -31,7 +33,5 @@
 				</tr>
 			</c:forEach>
 		</table>
-
-		<a class="btn btn-primary" href="<c:url value="/users/seeder" />">Seed me some users please</a>
 	</div>
 </t:wrapper>

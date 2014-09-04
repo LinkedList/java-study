@@ -82,6 +82,27 @@ public class UsersController {
 
 		return "redirect:/users/user/" + id;
 	}
+
+	@RequestMapping(value="/user/create", method=RequestMethod.GET)
+	public String userCreate(Model model) {
+		User user = new User();
+
+		model.addAttribute("user", user);
+		return "users/userCreate";
+	}
+
+
+	@RequestMapping(value="/user/create", method=RequestMethod.POST)
+	public String userCreatePost(@ModelAttribute @Valid User user, BindingResult result, Model model) {
+
+		if(result.hasErrors()) {
+			return "users/userCreate";
+		}
+
+		userManager.saveOrUpdate(user);
+		
+		return "redirect:/users/user/" + user.getId();
+	}
 	/**
 	 * Exception handler for FileNotFoundException
 	 * @return fileNotFound view
