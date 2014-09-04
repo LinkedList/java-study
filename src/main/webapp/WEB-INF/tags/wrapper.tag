@@ -26,13 +26,7 @@
 				role="navigation">
 				<ul class="nav navbar-nav">
 					<li><a href="<c:url value="/users/" />">Users</a></li>
-					<li><a href="#">Something</a></li>
-					<li><a href="#">will</a></li>
-					<li><a href="#">be</a></li>
-					<li><a href="#">here</a></li>
-					<li><a href="#">in</a></li>
-					<li><a href="#">the</a></li>
-					<li><a href="#">future</a></li>
+					<li><a href="<c:url value="/books/" />">Books</a></li>
 				</ul>
 			</nav>
 		</div>
