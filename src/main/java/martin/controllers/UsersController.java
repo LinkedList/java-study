@@ -108,7 +108,7 @@ public class UsersController {
 	 * @return fileNotFound view
 	 */
 	@ExceptionHandler({UserNotFoundException.class})
-	public String fileNotFoundExceptionHandler() {
+	public String userNotFoundExceptionHandler() {
 		return "exceptions/userNotFound";
 	}
 
