@@ -15,7 +15,6 @@
 					<th>ID</th>
 					<th>Title</th>
 					<th>Description</th>
-					<th></th>
 				</tr>
 			</thead>
 			<c:forEach items="${books}" var="book">
