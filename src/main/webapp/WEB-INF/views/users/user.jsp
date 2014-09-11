@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="t" tagdir="/WEB-INF/tags"%>
 <%@ page isELIgnored="false"%>
 <t:wrapper>
 	<div class="container">
@@ -21,6 +21,23 @@
 				<td>Email</td>
 				<td><c:out value="${user.email}" /></td>
 			</tr>
+		</table>
+		<h2>(S)He has some books as well</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${user.books}" var="book">
+					<tr>
+						<td><c:out value="${book.title}" /></td>
+						<td><c:out value="${book.description}" /></td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 	</div>
 </t:wrapper>

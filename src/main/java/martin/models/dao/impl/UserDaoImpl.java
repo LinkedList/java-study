@@ -3,6 +3,7 @@ package martin.models.dao.impl;
 import java.util.List;
 import martin.models.dao.UserDao;
 import martin.models.entities.User;
+import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -38,6 +39,7 @@ public class UserDaoImpl implements UserDao {
 
 		try {
 			user = (User) session.get(User.class, id);
+			Hibernate.initialize(user.getBooks());
 
 			return user;
 		} finally {
