@@ -7,7 +7,7 @@
 <%@ page isELIgnored="false"%>
 <t:wrapper>
 	<div class="container">
-		<h1>There shall be all of the users listed here in all their glory</h1>
+		<h1>Books</h1>
 		<a class="btn btn-primary" href="<c:url value="/books/seeder" />">Seed me some books please</a>
 		<table class="table table-striped">
 			<thead>
