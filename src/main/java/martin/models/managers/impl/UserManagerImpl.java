@@ -42,4 +42,9 @@ public class UserManagerImpl implements UserManager{
 	public User findById(Long id) {
 		return userDao.findById(id);
 	}
+
+	@Override
+	public User findByIdWithDetails(Long id) {
+		return userDao.findByIdWithDetails(id);
+	}
 }

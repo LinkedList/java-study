@@ -13,4 +13,5 @@ public interface UserManager {
 	public void delete(Long id);
 	public void saveOrUpdate(User user);
 	public User findById(Long id);
+	public User findByIdWithDetails(Long id);
 }

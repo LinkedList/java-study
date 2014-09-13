@@ -52,7 +52,7 @@ public class UsersController {
 	@RequestMapping(value = "/user/{id}")
 	public String user(@PathVariable("id") Long id, Model model) throws UserNotFoundException {
 
-		User user = userManager.findById(id);
+		User user = userManager.findByIdWithDetails(id);
 
 		if (user == null) {
 			throw new UserNotFoundException();

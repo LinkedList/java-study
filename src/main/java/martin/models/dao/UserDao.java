@@ -8,6 +8,8 @@ public interface UserDao {
 	 public List<User> findAll();
 	 
 	 public User findById(Long id);
+
+	 public User findByIdWithDetails(Long id);
 	 
 	 public void saveOrUpdate(User user);
 	 

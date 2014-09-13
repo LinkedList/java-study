@@ -39,7 +39,6 @@ public class UserDaoImpl implements UserDao {
 
 		try {
 			user = (User) session.get(User.class, id);
-			Hibernate.initialize(user.getBooks());
 
 			return user;
 		} finally {
@@ -84,6 +83,21 @@ public class UserDaoImpl implements UserDao {
 				transaction.rollback();
 			}
 
+		} finally {
+			session.close();
+		}
+	}
+
+	@Override
+	public User findByIdWithDetails(Long id) {
+		final Session session = sessFactory.openSession();
+		User user = null;
+
+		try {
+			user = (User) session.get(User.class, id);
+			Hibernate.initialize(user.getBooks());
+
+			return user;
 		} finally {
 			session.close();
 		}
