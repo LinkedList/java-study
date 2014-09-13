@@ -1,5 +1,6 @@
 package martin.controllers;
 
+import martin.exceptions.UserNotFoundException;
 import java.util.List;
 import javax.validation.Valid;
 import martin.models.entities.User;
@@ -112,22 +113,4 @@ public class UsersController {
 		return "exceptions/userNotFound";
 	}
 
-	public class UserNotFoundException extends Exception {
-
-		public UserNotFoundException() {
-			super();
-		}
-
-		public UserNotFoundException(String message) {
-			super(message);
-		}
-
-		public UserNotFoundException(String message, Throwable cause) {
-			super(message, cause);
-		}
-
-		public UserNotFoundException(Throwable cause) {
-			super(cause);
-		}
-	}
 }
