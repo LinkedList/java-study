@@ -21,7 +21,7 @@ public class BookManagerImpl implements BookManager {
 
 	@Override
 	public void delete(Long id) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		bookDao.delete(id);
 	}
 
 	@Override
@@ -31,7 +31,12 @@ public class BookManagerImpl implements BookManager {
 
 	@Override
 	public Book findById(Long id) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return bookDao.findById(id);
+	}
+
+	@Override
+	public Book findByIdWithUser(Long id) {
+		return bookDao.findByIdWithUser(id);
 	}
 	
 }

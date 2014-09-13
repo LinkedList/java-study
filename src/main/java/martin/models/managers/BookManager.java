@@ -16,4 +16,6 @@ public interface BookManager {
 	public void saveOrUpdate(Book book);
 
 	public Book findById(Long id);
+
+	public Book findByIdWithUser(Long id);
 }

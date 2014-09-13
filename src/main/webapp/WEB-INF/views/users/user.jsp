@@ -36,6 +36,13 @@
 					<tr>
 						<td><c:out value="${book.title}" /></td>
 						<td><c:out value="${book.description}" /></td>
+						<td>
+							<div class="btn-group btn-group-xs">
+							    <a class="btn btn-danger" href="<c:url value="/books/book/delete/${book.id}" />">
+								Delete
+							    </a>
+							</div>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>

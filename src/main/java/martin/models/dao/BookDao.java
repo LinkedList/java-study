@@ -13,6 +13,8 @@ public interface BookDao {
 
 	public Book findById(Long id);
 
+	public Book findByIdWithUser(Long id);
+
 	public void saveOrUpdate(Book book);
 
 	public void delete(Long id);

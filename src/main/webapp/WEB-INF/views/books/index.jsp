@@ -22,6 +22,16 @@
 					<td>${book.id}</td>
 					<td>${book.title}</td>
 					<td>${book.description}</td>
+					<td>
+						<div class="btn-group btn-group-xs">
+						    <a class="btn btn-danger" href="
+						       <c:url value="/books/book/delete/${book.id}">
+							       <c:param	name="returnToIndex" value="true" />
+						       </c:url>">
+							Delete
+						    </a>
+						</div>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -71,5 +72,19 @@ public class BooksController {
 		bookManager.saveOrUpdate(book);
 
 		return "redirect:/users/user/" + userId;
+	}
+
+	@RequestMapping(value="/book/delete/{id}")
+	public String bookDelete(@PathVariable("id") Long id, @RequestParam(value = "returnToIndex", required = false) Boolean returnToIndex) {
+		Book book = bookManager.findByIdWithUser(id);
+		User user = book.getUser();
+
+		bookManager.delete(book.getId());
+		
+		if(returnToIndex != null) {
+			return "redirect:/books/";
+		} else {
+			return "redirect:/users/user/" + user.getId();
+		}
 	}
 }
