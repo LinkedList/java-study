@@ -49,7 +49,7 @@ public class BooksController {
 		return "books/index";
 	}
 	
-	@RequestMapping(value="/create/{userId}", method=RequestMethod.GET)
+	@RequestMapping(value="/book/create/{userId}", method=RequestMethod.GET)
 	public String bookCreate(@PathVariable("userId") Long userId, Model model) {
 		Book book = new Book();
 
@@ -58,7 +58,7 @@ public class BooksController {
 		return "books/bookCreate";
 	}
 
-	@RequestMapping(value="/create/{userId}", method=RequestMethod.POST)
+	@RequestMapping(value="/book/create/{userId}", method=RequestMethod.POST)
 	public String bookCreatePost(@PathVariable("userId") Long userId, @ModelAttribute @Valid Book book, BindingResult result, Model model) {
 
 		if(result.hasErrors()) {

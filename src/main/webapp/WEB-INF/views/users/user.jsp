@@ -23,7 +23,7 @@
 			</tr>
 		</table>
 		<h2>(S)He has some books as well</h2>
-		<a class="btn btn-default" href="<c:url value="/books/create/${user.id}" />">Create new book for this magnificent bastard</a>
+		<a class="btn btn-default" href="<c:url value="/books/book/create/${user.id}" />">Create new book for this magnificent bastard</a>
 		<table class="table">
 			<thead>
 				<tr>
