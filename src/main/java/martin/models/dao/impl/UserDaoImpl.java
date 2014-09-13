@@ -73,9 +73,9 @@ public class UserDaoImpl implements UserDao {
 			final Transaction transaction = session.beginTransaction();
 
 			try {
-				User user = new User();
-				user.setId(id);
 
+				User user = (User) session.get(User.class, id);
+				
 				session.delete(user);
 				transaction.commit();
 			} catch (Exception e) {

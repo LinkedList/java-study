@@ -74,8 +74,7 @@ public class BookDaoImpl implements BookDao {
 			final Transaction transaction = session.beginTransaction();
 
 			try {
-				Book book = new Book();
-				book.setId(id);
+				Book book = (Book) session.get(Book.class, id);
 
 				session.delete(book);
 				transaction.commit();

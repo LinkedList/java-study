@@ -2,6 +2,7 @@ package martin.models.entities;
 
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,8 +30,7 @@ public class User {
 	@Email
 	private String email;
 
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Book> books = new LinkedList<Book>();
 	
 	public User() {}
