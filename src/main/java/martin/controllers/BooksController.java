@@ -4,6 +4,7 @@ import java.util.List;
 import javax.validation.Valid;
 import martin.models.entities.Book;
 import martin.models.entities.User;
+import martin.models.fobjects.FBook;
 import martin.models.managers.BookManager;
 import martin.models.managers.UserManager;
 import martin.models.seeders.BooksSeeder;
@@ -72,6 +73,34 @@ public class BooksController {
 		bookManager.saveOrUpdate(book);
 
 		return "redirect:/users/user/" + userId;
+	}
+
+	@RequestMapping(value="/book/edit/{id}", method=RequestMethod.GET)
+	public String bookEdit(@PathVariable("id") Long id, Model model) {
+
+		Book book = bookManager.findById(id);
+		FBook fBook = new FBook();
+		fBook.setTitle(book.getTitle());
+		fBook.setDescription(book.getDescription());
+
+		model.addAttribute("FBook", fBook);
+		model.addAttribute("id", id);
+		return "books/bookEdit";
+	}
+	
+	@RequestMapping(value="/book/edit/{id}", method=RequestMethod.POST)
+	public String bookEditPost(@PathVariable("id") Long id, @ModelAttribute @Valid FBook fBook, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			return "books/bookEdit";
+		}
+
+		Book bookToSave = bookManager.findById(id);
+		bookToSave.setTitle(fBook.getTitle());
+		bookToSave.setDescription(fBook.getDescription());
+
+		bookManager.saveOrUpdate(bookToSave);
+
+		return "redirect:/books/";
 	}
 
 	@RequestMapping(value="/book/delete/{id}")

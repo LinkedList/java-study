@@ -38,6 +38,9 @@
 						<td><c:out value="${book.description}" /></td>
 						<td>
 							<div class="btn-group btn-group-xs">
+							    <a class="btn btn-default" href="<c:url value="/books/book/edit/${book.id}" />">
+								Edit
+							    </a>
 							    <a class="btn btn-danger" href="<c:url value="/books/book/delete/${book.id}" />">
 								Delete
 							    </a>
