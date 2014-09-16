@@ -1,6 +1,7 @@
 package martin.controllers;
 
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import martin.models.entities.Book;
 import martin.models.entities.User;
@@ -76,7 +77,7 @@ public class BooksController {
 	}
 
 	@RequestMapping(value="/book/edit/{id}", method=RequestMethod.GET)
-	public String bookEdit(@PathVariable("id") Long id, Model model) {
+	public String bookEdit(@PathVariable("id") Long id, @RequestParam(required = false, value = "returnToIndex", defaultValue = "false") Boolean returnToIndex, Model model) {
 
 		Book book = bookManager.findById(id);
 		FBook fBook = new FBook();
@@ -85,12 +86,16 @@ public class BooksController {
 
 		model.addAttribute("FBook", fBook);
 		model.addAttribute("id", id);
+		if(returnToIndex) {
+			model.addAttribute("returnToIndex", returnToIndex);
+		}
 		return "books/bookEdit";
 	}
 	
 	@RequestMapping(value="/book/edit/{id}", method=RequestMethod.POST)
-	public String bookEditPost(@PathVariable("id") Long id, @ModelAttribute @Valid FBook fBook, BindingResult result, Model model) {
+	public String bookEditPost(@PathVariable("id") Long id, @ModelAttribute @Valid FBook fBook, BindingResult result, @RequestParam(required = false, value = "returnToIndex", defaultValue = "false") Boolean returnToIndex, Model model) {
 		if(result.hasErrors()) {
+			model.addAttribute("returnToIndex", returnToIndex);
 			return "books/bookEdit";
 		}
 
@@ -100,7 +105,12 @@ public class BooksController {
 
 		bookManager.saveOrUpdate(bookToSave);
 
-		return "redirect:/books/";
+		if(returnToIndex) {
+			return "redirect:/books/";
+		} else {
+			Book book = bookManager.findByIdWithUser(id);
+			return "redirect:/users/user/" + book.getUser().getId();
+		}
 	}
 
 	@RequestMapping(value="/book/delete/{id}")

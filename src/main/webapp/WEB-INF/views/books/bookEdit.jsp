@@ -10,7 +10,16 @@
 	<div class="container">
 		<h1>Edit this book please</h1>
 
-		<c:url var="postUrl" value="/books/book/edit/${id}" />
+		<c:choose>
+			<c:when test="${returnToIndex}">
+				<c:url var="postUrl" value="/books/book/edit/${id}">
+					<c:param name="returnToIndex" value="true" />
+				</c:url>
+			</c:when>
+			<c:otherwise>
+				<c:url var="postUrl" value="/books/book/edit/${id}" />
+			</c:otherwise>
+		</c:choose>
 		<form:form method="POST" commandName="FBook" role="form" action="${postUrl}">
 			<div class="form-group">
 				<label for="title">Title:</label>
