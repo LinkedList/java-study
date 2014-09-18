@@ -43,13 +43,6 @@ public class BooksController {
 		return "redirect:/books/";
 	}
 
-	@RequestMapping(value = "/")
-	public String index(Model model) {
-		List<Book> books = bookManager.findAll();
-
-		model.addAttribute("books", books);
-		return "books/index";
-	}
 	
 	@RequestMapping(value="/book/create/{userId}", method=RequestMethod.GET)
 	public String bookCreate(@PathVariable("userId") Long userId, Model model) {
