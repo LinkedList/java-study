@@ -1,7 +1,6 @@
 package martin.controllers;
 
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import martin.models.entities.Book;
 import martin.models.entities.User;
