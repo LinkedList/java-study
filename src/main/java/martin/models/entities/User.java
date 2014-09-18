@@ -31,8 +31,11 @@ public class User {
 	private String email;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Book> books = new LinkedList<Book>();
+	private List<Book> books = new LinkedList<>();
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Account> accounts = new LinkedList<>();
+
 	public User() {}
 
 	public Long getId() {
@@ -65,6 +68,14 @@ public class User {
 
 	public void setBooks(List<Book> books) {
 		this.books = books;
+	}
+
+	public List<Account> getAccounts() {
+		return accounts;
+	}
+
+	public void setAccounts(List<Account> accounts) {
+		this.accounts = accounts;
 	}
 
 	@Override
