@@ -27,6 +27,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="<c:url value="/users/" />">Users</a></li>
 					<li><a href="<c:url value="/books/" />">Books</a></li>
+					<li><a href="<c:url value="/admin/accounts/" />">Accounts</a></li>
 				</ul>
 			</nav>
 		</div>
