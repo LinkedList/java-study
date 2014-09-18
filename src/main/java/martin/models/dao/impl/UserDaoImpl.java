@@ -96,6 +96,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			user = (User) session.get(User.class, id);
 			Hibernate.initialize(user.getBooks());
+			Hibernate.initialize(user.getAccounts());
 
 			return user;
 		} finally {

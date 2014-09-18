@@ -23,7 +23,7 @@
 			</tr>
 		</table>
 		<h2>(S)He has some books as well</h2>
-		<a class="btn btn-default" href="<c:url value="/books/create/${user.id}" />">Create new book for this magnificent bastard</a>
+		<a class="btn btn-primary" href="<c:url value="/books/create/${user.id}" />">Create new book</a>
 		<table class="table">
 			<thead>
 				<tr>
@@ -49,6 +49,38 @@
 					</tr>
 				</c:forEach>
 			</tbody>
+		</table>
+		<h1>Accounts</h1>
+		<a class="btn btn-primary" href="<c:url value="/account/create/${user.id}" />">Create an account</a>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Name</th>
+					<th>Prefix</th>
+					<th>Number</th>
+					<th>Bank Code</th>
+				</tr>
+			</thead>
+			<c:forEach items="${user.accounts}" var="account">
+				<tr>
+					<td>${account.id}</td>
+					<td>${account.name}</td>
+					<td>${account.prefix}</td>
+					<td>${account.number}</td>
+					<td>${account.code}</td>
+					<td>
+						<div class="btn-group btn-group-xs">
+						    <a class="btn btn-default" href="">
+							Edit
+						    </a>
+						    <a class="btn btn-danger" href="">
+							Delete
+						    </a>
+						</div>
+					</td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 </t:wrapper>
