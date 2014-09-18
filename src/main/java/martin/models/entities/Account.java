@@ -32,9 +32,11 @@ public class Account {
 	private Integer prefix;
 	
 	@Column(name="number")
+	@NotEmpty
 	private Integer number;
 
 	@Column(name="code")
+	@NotEmpty
 	private Integer code;
 
 	@ManyToOne(fetch = FetchType.LAZY)
