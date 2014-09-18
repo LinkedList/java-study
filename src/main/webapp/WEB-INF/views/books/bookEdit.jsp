@@ -12,12 +12,12 @@
 
 		<c:choose>
 			<c:when test="${returnToIndex}">
-				<c:url var="postUrl" value="/books/book/edit/${id}">
+				<c:url var="postUrl" value="/books/edit/${id}">
 					<c:param name="returnToIndex" value="true" />
 				</c:url>
 			</c:when>
 			<c:otherwise>
-				<c:url var="postUrl" value="/books/book/edit/${id}" />
+				<c:url var="postUrl" value="/books/edit/${id}" />
 			</c:otherwise>
 		</c:choose>
 		<form:form method="POST" commandName="FBook" role="form" action="${postUrl}">

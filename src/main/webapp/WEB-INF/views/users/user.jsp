@@ -9,7 +9,7 @@
 	<div class="container">
 		<h1 class="pull-left">This is the chosen one!</h1>
 		<div class="btn-group pull-right">
-			<a class="btn btn-default" href="<c:url value="/users/user/edit/${user.id}" />">Edit</a>
+			<a class="btn btn-default" href="<c:url value="/users/edit/${user.id}" />">Edit</a>
 			<a class="btn btn-danger" href="<c:url value="/users/delete/${user.id}" />">Delete</a>
 		</div>
 		<table class="table">
@@ -23,7 +23,7 @@
 			</tr>
 		</table>
 		<h2>(S)He has some books as well</h2>
-		<a class="btn btn-default" href="<c:url value="/books/book/create/${user.id}" />">Create new book for this magnificent bastard</a>
+		<a class="btn btn-default" href="<c:url value="/books/create/${user.id}" />">Create new book for this magnificent bastard</a>
 		<table class="table">
 			<thead>
 				<tr>
@@ -38,10 +38,10 @@
 						<td><c:out value="${book.description}" /></td>
 						<td>
 							<div class="btn-group btn-group-xs">
-							    <a class="btn btn-default" href="<c:url value="/books/book/edit/${book.id}" />">
+							    <a class="btn btn-default" href="<c:url value="/books/edit/${book.id}" />">
 								Edit
 							    </a>
-							    <a class="btn btn-danger" href="<c:url value="/books/book/delete/${book.id}" />">
+							    <a class="btn btn-danger" href="<c:url value="/books/delete/${book.id}" />">
 								Delete
 							    </a>
 							</div>

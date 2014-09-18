@@ -44,7 +44,7 @@ public class BooksController {
 	}
 
 	
-	@RequestMapping(value="/book/create/{userId}", method=RequestMethod.GET)
+	@RequestMapping(value="/create/{userId}", method=RequestMethod.GET)
 	public String bookCreate(@PathVariable("userId") Long userId, Model model) {
 		Book book = new Book();
 
@@ -53,7 +53,7 @@ public class BooksController {
 		return "books/bookCreate";
 	}
 
-	@RequestMapping(value="/book/create/{userId}", method=RequestMethod.POST)
+	@RequestMapping(value="/create/{userId}", method=RequestMethod.POST)
 	public String bookCreatePost(@PathVariable("userId") Long userId, @ModelAttribute @Valid Book book, BindingResult result, Model model) {
 
 		if(result.hasErrors()) {
@@ -65,10 +65,10 @@ public class BooksController {
 
 		bookManager.saveOrUpdate(book);
 
-		return "redirect:/users/user/" + userId;
+		return "redirect:/users/" + userId;
 	}
 
-	@RequestMapping(value="/book/edit/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
 	public String bookEdit(@PathVariable("id") Long id, @RequestParam(required = false, value = "returnToIndex", defaultValue = "false") Boolean returnToIndex, Model model) {
 
 		Book book = bookManager.findById(id);
@@ -84,7 +84,7 @@ public class BooksController {
 		return "books/bookEdit";
 	}
 	
-	@RequestMapping(value="/book/edit/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/edit/{id}", method=RequestMethod.POST)
 	public String bookEditPost(@PathVariable("id") Long id, @ModelAttribute @Valid FBook fBook, BindingResult result, @RequestParam(required = false, value = "returnToIndex", defaultValue = "false") Boolean returnToIndex, Model model) {
 		if(result.hasErrors()) {
 			model.addAttribute("returnToIndex", returnToIndex);
@@ -98,14 +98,14 @@ public class BooksController {
 		bookManager.saveOrUpdate(bookToSave);
 
 		if(returnToIndex) {
-			return "redirect:/books/";
+			return "redirect:/admin/books/";
 		} else {
 			Book book = bookManager.findByIdWithUser(id);
-			return "redirect:/users/user/" + book.getUser().getId();
+			return "redirect:/users/" + book.getUser().getId();
 		}
 	}
 
-	@RequestMapping(value="/book/delete/{id}")
+	@RequestMapping(value="/delete/{id}")
 	public String bookDelete(@PathVariable("id") Long id, @RequestParam(value = "returnToIndex", required = false) Boolean returnToIndex) {
 		Book book = bookManager.findByIdWithUser(id);
 		User user = book.getUser();
@@ -113,9 +113,9 @@ public class BooksController {
 		bookManager.delete(book.getId());
 		
 		if(returnToIndex != null) {
-			return "redirect:/books/";
+			return "redirect:/admin/books/";
 		} else {
-			return "redirect:/users/user/" + user.getId();
+			return "redirect:/users/" + user.getId();
 		}
 	}
 }

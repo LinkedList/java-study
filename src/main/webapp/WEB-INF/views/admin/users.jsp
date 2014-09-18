@@ -9,7 +9,7 @@
 	<div class="container">
 		<h1>There shall be all of the users listed here in all their glory</h1>
 		<a class="btn btn-primary" href="<c:url value="/users/seeder" />">Seed me some users please</a>
-		<a class="btn btn-primary" href="<c:url value="/users/user/create" />">Let me create a new one please</a>
+		<a class="btn btn-primary" href="<c:url value="/users/create" />">Let me create a new one please</a>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -26,8 +26,8 @@
 					<td>${user.email}</td>
 					<td>
 						<div class="btn-group btn-group-xs">
-							<a class="btn btn-primary" href="<c:url value="/users/user/${user.id}" />">Detail</a>
-							<a class="btn btn-default" href="<c:url value="/users/user/edit/${user.id}" />">Edit</a>
+							<a class="btn btn-primary" href="<c:url value="/users/${user.id}" />">Detail</a>
+							<a class="btn btn-default" href="<c:url value="/users/edit/${user.id}" />">Edit</a>
 							<a class="btn btn-danger" href="<c:url value="/users/delete/${user.id}" />">Delete</a>
 						</div></td>
 				</tr>

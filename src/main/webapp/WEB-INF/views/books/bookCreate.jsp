@@ -10,7 +10,7 @@
 	<div class="container">
 		<h1>Create a new awesome book</h1>
 
-		<c:url var="postUrl" value="/books/book/create/${userId}" />
+		<c:url var="postUrl" value="/books/create/${userId}" />
 		<form:form method="POST" commandName="book" role="form" action="${postUrl}">
 			<div class="form-group">
 				<label for="title">Title:</label>

@@ -34,23 +34,15 @@ public class UsersController {
 		return "redirect:/users/";
 	}
 
-	@RequestMapping(value = "/")
-	public String index(Model model) {
-		List<User> users = userManager.findAll();
-
-		model.addAttribute("users", users);
-		return "users/index";
-	}
-
 	@RequestMapping(value = "/delete/{id}")
 	public String delete(@PathVariable("id") Long id) {
 
 		userManager.delete(id);
 
-		return "redirect:/users/";
+		return "redirect:/admin/users/";
 	}
 
-	@RequestMapping(value = "/user/{id}")
+	@RequestMapping(value = "/{id}")
 	public String user(@PathVariable("id") Long id, Model model) throws UserNotFoundException {
 
 		User user = userManager.findByIdWithDetails(id);
@@ -62,7 +54,7 @@ public class UsersController {
 		return "users/user";
 	}
 
-	@RequestMapping(value = "/user/edit/{id}", method=RequestMethod.GET)
+	@RequestMapping(value = "/edit/{id}", method=RequestMethod.GET)
 	public String userEdit(@PathVariable("id") Long id, Model model) throws UserNotFoundException {
 
 		User user = userManager.findById(id);
@@ -74,17 +66,17 @@ public class UsersController {
 		return "users/userEdit";
 	}
 
-	@RequestMapping(value = "/user/edit/{id}", method=RequestMethod.POST)
+	@RequestMapping(value = "/edit/{id}", method=RequestMethod.POST)
 	public String userEditPost(@PathVariable("id") Long id, @ModelAttribute @Valid User user, BindingResult result,  Model model) throws UserNotFoundException {
 		if(result.hasErrors()) {
 			return "users/userEdit";
 		}
 		userManager.saveOrUpdate(user);
 
-		return "redirect:/users/user/" + id;
+		return "redirect:/users/" + id;
 	}
 
-	@RequestMapping(value="/user/create", method=RequestMethod.GET)
+	@RequestMapping(value="/create", method=RequestMethod.GET)
 	public String userCreate(Model model) {
 		User user = new User();
 
@@ -93,7 +85,7 @@ public class UsersController {
 	}
 
 
-	@RequestMapping(value="/user/create", method=RequestMethod.POST)
+	@RequestMapping(value="/create", method=RequestMethod.POST)
 	public String userCreatePost(@ModelAttribute @Valid User user, BindingResult result, Model model) {
 
 		if(result.hasErrors()) {
@@ -102,7 +94,7 @@ public class UsersController {
 
 		userManager.saveOrUpdate(user);
 		
-		return "redirect:/users/user/" + user.getId();
+		return "redirect:/users/" + user.getId();
 	}
 	/**
 	 * Exception handler for FileNotFoundException

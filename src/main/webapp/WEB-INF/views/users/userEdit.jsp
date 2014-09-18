@@ -10,7 +10,7 @@
 	<div class="container">
 		<h1>Edit the chosen one!</h1>
 
-		<c:url var="postUrl" value="/users/user/edit/${user.id}" />
+		<c:url var="postUrl" value="/users/edit/${user.id}" />
 		<form:form method="POST" commandName="user" role="form" action="${postUrl}">
 			<div class="form-group">
 				<label for="login">Login:</label>

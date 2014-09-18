@@ -49,6 +49,6 @@ public class AccountController {
 
 		accountManager.saveOrUpdate(account);
 
-		return "redirect:/users/user/" + userId;
+		return "redirect:/users/" + userId;
 	}
 }

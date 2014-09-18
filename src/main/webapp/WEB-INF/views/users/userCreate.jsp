@@ -10,7 +10,7 @@
 	<div class="container">
 		<h1>Create a new magnificent user</h1>
 
-		<c:url var="postUrl" value="/users/user/create/" />
+		<c:url var="postUrl" value="/users/create/" />
 		<form:form method="POST" commandName="user" role="form" action="${postUrl}">
 			<div class="form-group">
 				<label for="login">Login:</label>
