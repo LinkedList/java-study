@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
@@ -32,11 +33,11 @@ public class Account {
 	private Integer prefix;
 	
 	@Column(name="number")
-	@NotEmpty
+	@NotNull
 	private Integer number;
 
 	@Column(name="code")
-	@NotEmpty
+	@NotNull
 	private Integer code;
 
 	@ManyToOne(fetch = FetchType.LAZY)
