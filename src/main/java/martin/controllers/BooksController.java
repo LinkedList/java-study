@@ -97,4 +97,9 @@ public class BooksController {
 	public String bookNotFoundExceptionHandler() {
 		return "exceptions/bookNotFound";
 	}
+
+	@ExceptionHandler({UserNotFoundException.class})
+	public String userNotFoundExceptionHandler() {
+		return "exceptions/userNotFound";
+	}
 }
