@@ -1,7 +1,6 @@
 package martin.controllers;
 
 import martin.exceptions.UserNotFoundException;
-import java.util.List;
 import javax.validation.Valid;
 import martin.models.entities.User;
 import martin.models.managers.UserManager;
