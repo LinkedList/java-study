@@ -85,7 +85,7 @@
 						       </c:url>">
 							Edit
 						    </a>
-						    <a class="btn btn-danger" href="">
+						    <a class="btn btn-danger" href="<c:url value="/account/delete/${account.id}" />">
 							Delete
 						    </a>
 						</div>

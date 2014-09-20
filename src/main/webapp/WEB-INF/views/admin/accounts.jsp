@@ -33,7 +33,10 @@
 						       </c:url>">
 							Edit
 						    </a>
-						    <a class="btn btn-danger" href="">
+						    <a class="btn btn-danger" href="
+						       <c:url value="/account/delete/${account.id}">
+							       <c:param name="returnToIndex" value="true" />
+						       </c:url>">
 							Delete
 						    </a>
 						</div>

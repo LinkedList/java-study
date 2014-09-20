@@ -85,6 +85,28 @@ public class AccountController {
 		return "redirect:/users/" + command.getAccount().getUser().getId();
 	}
 
+	@RequestMapping(value="/delete/{id}", method=RequestMethod.GET)
+	public String accountDelete(@PathVariable("id") Long id,
+			@RequestParam(value = "returnToIndex", required = false, defaultValue = "false") Boolean returnToIndex) throws AccountNotFoundException {
+		if(id == null) {
+			throw new AccountNotFoundException();
+		}
+
+		Account account = accountManager.findByIdWithUser(id);
+		User user = account.getUser();
+		if(account == null) {
+			throw new AccountNotFoundException();
+		}
+
+		accountManager.delete(id);
+
+		if(returnToIndex) {
+			return "redirect:/admin/accounts";
+		} else {
+			return "redirect:/users/" + user.getId();
+		}
+	}
+
 	@ExceptionHandler({UserNotFoundException.class})
 	public String userNotFoundExceptionHandler() {
 		return "exceptions/userNotFound";
