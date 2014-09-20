@@ -25,7 +25,9 @@
 			</tr>
 		</table>
 		<h2>(S)He has some books as well</h2>
-		<a class="btn btn-primary" href="<c:url value="/books/create/${user.id}" />">Create new book</a>
+		<a class="btn btn-primary" href="<c:url value="/books/createOrEdit">
+			   <c:param name="userId" value="${user.id}" />
+		   </c:url>">Create new book</a>
 		<table class="table">
 			<thead>
 				<tr>
@@ -40,7 +42,9 @@
 						<td><c:out value="${book.description}" /></td>
 						<td>
 							<div class="btn-group btn-group-xs">
-							    <a class="btn btn-default" href="<c:url value="/books/edit/${book.id}" />">
+							    <a class="btn btn-default" href="<c:url value="/books/createOrEdit">
+								       <c:param name="id" value="${book.id}" />
+							       </c:url>">
 								Edit
 							    </a>
 							    <a class="btn btn-danger" href="<c:url value="/books/delete/${book.id}" />">

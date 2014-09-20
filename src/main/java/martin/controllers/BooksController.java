@@ -1,21 +1,25 @@
 package martin.controllers;
 
 import javax.validation.Valid;
+import martin.exceptions.BookNotFoundException;
+import martin.exceptions.UserNotFoundException;
+import martin.models.commandobjects.BookCommandObject;
 import martin.models.entities.Book;
 import martin.models.entities.User;
-import martin.models.commandobjects.FBook;
 import martin.models.managers.BookManager;
 import martin.models.managers.UserManager;
-import martin.models.seeders.BooksSeeder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 /**
  *
@@ -23,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 @Controller
 @RequestMapping(value = "/books/")
+@SessionAttributes("command")
 public class BooksController {
 
 	@Autowired
@@ -31,77 +36,48 @@ public class BooksController {
 	@Autowired
 	private UserManager userManager;
 
-	@Autowired
-	private BooksSeeder booksSeeder;
-
-	@RequestMapping(value = "/seeder")
-	public String seeder() {
-		
-		booksSeeder.seed();
-
-		return "redirect:/books/";
+	@ModelAttribute("command")
+	public BookCommandObject createCommand() {
+		return new BookCommandObject();
 	}
 
-	
-	@RequestMapping(value="/create/{userId}", method=RequestMethod.GET)
-	public String bookCreate(@PathVariable("userId") Long userId, Model model) {
-		Book book = new Book();
+	@RequestMapping(value="/createOrEdit", method=RequestMethod.GET)
+	public String bookCreate(@RequestParam(value = "id", required = false) Long id, 
+				@RequestParam(value = "userId", required = false) Long userId, Model model) throws BookNotFoundException, UserNotFoundException {
 
-		model.addAttribute("book", book);
-		model.addAttribute("userId", userId);
-		return "books/bookCreate";
+		Book book = null;
+		if(id != null) {
+			book = bookManager.findByIdWithUser(id);
+			if(book == null) {
+				throw new BookNotFoundException();
+			}
+		} else if (id == null && userId == null) {
+			throw new UserNotFoundException();
+		} else {
+			User user = userManager.findById(userId);
+			if(user == null) {
+				throw new UserNotFoundException();
+			}
+			book = new Book();
+			book.setUser(user);
+		}
+
+		BookCommandObject command = this.createCommand();
+		command.setBook(book);
+
+		model.addAttribute("command", command);
+		return "books/bookCreateOrEdit";
 	}
 
-	@RequestMapping(value="/create/{userId}", method=RequestMethod.POST)
-	public String bookCreatePost(@PathVariable("userId") Long userId, @ModelAttribute @Valid Book book, BindingResult result, Model model) {
-
+	@RequestMapping(value="/createOrEdit", method=RequestMethod.POST)
+	public String bookCreatePost(@ModelAttribute("command") @Valid BookCommandObject command, BindingResult result, Model model) {
 		if(result.hasErrors()) {
-			return "books/bookCreate";
+			return "books/bookCreateOrEdit";
 		}	
 
-		User user = userManager.findById(userId);
-		book.setUser(user);
+		bookManager.saveOrUpdate(command.getBook());
 
-		bookManager.saveOrUpdate(book);
-
-		return "redirect:/users/" + userId;
-	}
-
-	@RequestMapping(value="/edit/{id}", method=RequestMethod.GET)
-	public String bookEdit(@PathVariable("id") Long id, @RequestParam(required = false, value = "returnToIndex", defaultValue = "false") Boolean returnToIndex, Model model) {
-
-		Book book = bookManager.findById(id);
-		FBook fBook = new FBook();
-		fBook.setTitle(book.getTitle());
-		fBook.setDescription(book.getDescription());
-
-		model.addAttribute("FBook", fBook);
-		model.addAttribute("id", id);
-		if(returnToIndex) {
-			model.addAttribute("returnToIndex", returnToIndex);
-		}
-		return "books/bookEdit";
-	}
-	
-	@RequestMapping(value="/edit/{id}", method=RequestMethod.POST)
-	public String bookEditPost(@PathVariable("id") Long id, @ModelAttribute @Valid FBook fBook, BindingResult result, @RequestParam(required = false, value = "returnToIndex", defaultValue = "false") Boolean returnToIndex, Model model) {
-		if(result.hasErrors()) {
-			model.addAttribute("returnToIndex", returnToIndex);
-			return "books/bookEdit";
-		}
-
-		Book bookToSave = bookManager.findById(id);
-		bookToSave.setTitle(fBook.getTitle());
-		bookToSave.setDescription(fBook.getDescription());
-
-		bookManager.saveOrUpdate(bookToSave);
-
-		if(returnToIndex) {
-			return "redirect:/admin/books/";
-		} else {
-			Book book = bookManager.findByIdWithUser(id);
-			return "redirect:/users/" + book.getUser().getId();
-		}
+		return "redirect:/users/" + command.getBook().getUser().getId();
 	}
 
 	@RequestMapping(value="/delete/{id}")
@@ -116,5 +92,10 @@ public class BooksController {
 		} else {
 			return "redirect:/users/" + user.getId();
 		}
+	}
+
+	@ExceptionHandler({BookNotFoundException.class})
+	public String bookNotFoundExceptionHandler() {
+		return "exceptions/bookNotFound";
 	}
 }

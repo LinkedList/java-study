@@ -25,8 +25,8 @@
 					<td>
 						<div class="btn-group btn-group-xs">
 						    <a class="btn btn-default" href="
-						       <c:url value="/books/edit/${book.id}">
-							       <c:param	name="returnToIndex" value="true" />
+						       <c:url value="/books/createOrEdit">
+							       <c:param	name="id" value="${book.id}" />
 						       </c:url>">
 							Edit
 						    </a>

@@ -8,28 +8,19 @@
 <%@ page isELIgnored="false"%>
 <t:wrapper>
 	<div class="container">
-		<h1>Edit this book please</h1>
+		<h1>Create a new awesome book</h1>
 
-		<c:choose>
-			<c:when test="${returnToIndex}">
-				<c:url var="postUrl" value="/books/edit/${id}">
-					<c:param name="returnToIndex" value="true" />
-				</c:url>
-			</c:when>
-			<c:otherwise>
-				<c:url var="postUrl" value="/books/edit/${id}" />
-			</c:otherwise>
-		</c:choose>
-		<form:form method="POST" commandName="FBook" role="form" action="${postUrl}">
+		<c:url var="postUrl" value="/books/createOrEdit" />
+		<form:form method="POST" role="form" commandName="command" action="${postUrl}">
 			<div class="form-group">
 				<label for="title">Title:</label>
-				<form:input path="title" class="form-control" id="title" />
-				<form:errors path="title" />
+				<form:input path="book.title" class="form-control" id="title" />
+				<form:errors path="book.title" />
 			</div>
 			<div class="form-group">
 				<label for="description">Description:</label>
-				<form:input path="description" class="form-control" id="description" />
-				<form:errors path="description" />
+				<form:input path="book.description" class="form-control" id="description" />
+				<form:errors path="book.description" />
 			</div>
 				<form:button type="submit" value="Save" class="btn btn-primary">Save</form:button>
 		</form:form>
