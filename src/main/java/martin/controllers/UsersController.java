@@ -2,6 +2,7 @@ package martin.controllers;
 
 import martin.exceptions.UserNotFoundException;
 import javax.validation.Valid;
+import martin.models.commandobjects.UserCommandObject;
 import martin.models.entities.User;
 import martin.models.managers.UserManager;
 import martin.models.seeders.UsersSeeder;
@@ -14,9 +15,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Controller
 @RequestMapping(value = "/users/")
+@SessionAttributes("command")
 public class UsersController {
 
 	@Autowired
@@ -25,12 +30,17 @@ public class UsersController {
 	@Autowired
 	private UsersSeeder usersSeeder;
 
+	@ModelAttribute("command")
+	public UserCommandObject createCommand() {
+		return new UserCommandObject();
+	}
+
 	@RequestMapping(value = "/seeder")
 	public String seeder() {
 		
 		usersSeeder.seed();
 
-		return "redirect:/users/";
+		return "redirect:/admin/users/";
 	}
 
 	@RequestMapping(value = "/delete/{id}")
@@ -53,47 +63,35 @@ public class UsersController {
 		return "users/user";
 	}
 
-	@RequestMapping(value = "/edit/{id}", method=RequestMethod.GET)
-	public String userEdit(@PathVariable("id") Long id, Model model) throws UserNotFoundException {
-
-		User user = userManager.findById(id);
-
-		if (user == null) {
-			throw new UserNotFoundException();
+	@RequestMapping(value="/createOrEdit", method=RequestMethod.GET)
+	public String userCreateOrEdit(@RequestParam(value = "id", required = false) Long id, Model model) throws UserNotFoundException {
+		User user = null;
+		if(id == null) {
+			user = new User();
+		} else {
+			user = userManager.findById(id);
+			if (user == null) {
+				throw new UserNotFoundException();
+			}
 		}
-		model.addAttribute("user", user);
-		return "users/userEdit";
+
+		UserCommandObject command = this.createCommand();
+		command.setUser(user);
+
+		model.addAttribute("command", command);
+		return "users/userCreateOrEdit";
 	}
 
-	@RequestMapping(value = "/edit/{id}", method=RequestMethod.POST)
-	public String userEditPost(@PathVariable("id") Long id, @ModelAttribute @Valid User user, BindingResult result,  Model model) throws UserNotFoundException {
+
+	@RequestMapping(value="/createOrEdit", method=RequestMethod.POST)
+	public String userCreateOrEditPost(@ModelAttribute("command") @Valid UserCommandObject command, BindingResult result, Model model, SessionStatus status) {
 		if(result.hasErrors()) {
-			return "users/userEdit";
-		}
-		userManager.saveOrUpdate(user);
-
-		return "redirect:/users/" + id;
-	}
-
-	@RequestMapping(value="/create", method=RequestMethod.GET)
-	public String userCreate(Model model) {
-		User user = new User();
-
-		model.addAttribute("user", user);
-		return "users/userCreate";
-	}
-
-
-	@RequestMapping(value="/create", method=RequestMethod.POST)
-	public String userCreatePost(@ModelAttribute @Valid User user, BindingResult result, Model model) {
-
-		if(result.hasErrors()) {
-			return "users/userCreate";
+			return "users/userCreateOrEdit";
 		}
 
-		userManager.saveOrUpdate(user);
+		userManager.saveOrUpdate(command.getUser());
 		
-		return "redirect:/users/" + user.getId();
+		return "redirect:/users/" + command.getUser().getId();
 	}
 	/**
 	 * Exception handler for FileNotFoundException

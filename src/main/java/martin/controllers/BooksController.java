@@ -3,7 +3,7 @@ package martin.controllers;
 import javax.validation.Valid;
 import martin.models.entities.Book;
 import martin.models.entities.User;
-import martin.models.fobjects.FBook;
+import martin.models.commandobjects.FBook;
 import martin.models.managers.BookManager;
 import martin.models.managers.UserManager;
 import martin.models.seeders.BooksSeeder;

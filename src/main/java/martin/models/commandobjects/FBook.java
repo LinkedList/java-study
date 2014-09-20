@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package martin.models.fobjects;
+package martin.models.commandobjects;
 
 import org.hibernate.validator.constraints.NotEmpty;
 

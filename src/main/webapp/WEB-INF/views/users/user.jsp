@@ -9,7 +9,9 @@
 	<div class="container">
 		<h1 class="pull-left">This is the chosen one!</h1>
 		<div class="btn-group pull-right">
-			<a class="btn btn-default" href="<c:url value="/users/edit/${user.id}" />">Edit</a>
+		    <a class="btn btn-default" href="<c:url value="/users/createOrEdit">
+			       <c:param name="id" value="${user.id}" />
+		       </c:url>">Edit</a>
 			<a class="btn btn-danger" href="<c:url value="/users/delete/${user.id}" />">Delete</a>
 		</div>
 		<table class="table">
