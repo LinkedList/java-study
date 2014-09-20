@@ -29,6 +29,11 @@
 					<li><a href="<c:url value="/admin/books/" />">Books</a></li>
 					<li><a href="<c:url value="/admin/accounts/" />">Accounts</a></li>
 				</ul>
+				<ul class="nav navbar-nav pull-right">
+					<c:if test="${pageContext.request.userPrincipal.name != null}">
+					    <li><a href="<c:url value="/j_spring_security_logout" />" > Logout</a></li>  
+					</c:if>
+				</ul>
 			</nav>
 		</div>
 	</header>
