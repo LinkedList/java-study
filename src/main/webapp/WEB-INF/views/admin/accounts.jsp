@@ -27,7 +27,10 @@
 					<td>${account.code}</td>
 					<td>
 						<div class="btn-group btn-group-xs">
-						    <a class="btn btn-default" href="">
+						    <a class="btn btn-default" href="
+						       <c:url value="/account/createOrEdit">
+							       <c:param name="id" value="${account.id}" />
+						       </c:url>">
 							Edit
 						    </a>
 						    <a class="btn btn-danger" href="">

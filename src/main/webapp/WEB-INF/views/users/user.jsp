@@ -57,7 +57,9 @@
 			</tbody>
 		</table>
 		<h1>Accounts</h1>
-		<a class="btn btn-primary" href="<c:url value="/account/create/${user.id}" />">Create an account</a>
+		<a class="btn btn-primary" href="<c:url value="/account/createOrEdit">
+			   <c:param name="userId" value="${user.id}" />
+		   </c:url>">Create an account</a>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -77,7 +79,10 @@
 					<td>${account.code}</td>
 					<td>
 						<div class="btn-group btn-group-xs">
-						    <a class="btn btn-default" href="">
+						    <a class="btn btn-default" href="
+						       <c:url value="/account/createOrEdit">
+							       <c:param name="id" value="${account.id}" />
+						       </c:url>">
 							Edit
 						    </a>
 						    <a class="btn btn-danger" href="">

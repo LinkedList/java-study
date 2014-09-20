@@ -1,6 +1,9 @@
 package martin.controllers;
 
 import javax.validation.Valid;
+import martin.exceptions.AccountNotFoundException;
+import martin.exceptions.UserNotFoundException;
+import martin.models.commandobjects.AccountCommandObject;
 import martin.models.entities.Account;
 import martin.models.entities.User;
 import martin.models.managers.AccountManager;
@@ -9,10 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 /**
  *
@@ -20,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping(value = "/account/")
+@SessionAttributes({"command"})
 public class AccountController {
 
 	@Autowired
@@ -27,28 +34,64 @@ public class AccountController {
 
 	@Autowired
 	private UserManager userManager;
-	
-	@RequestMapping(value="/create/{userId}", method=RequestMethod.GET)
-	public String accountCreate(@PathVariable("userId") Long userId, Model model) {
-		Account account = new Account();
 
-		model.addAttribute("account", account);
-		model.addAttribute("userId", userId);
-		return "account/accountCreate";
+	@ModelAttribute("command")
+	public AccountCommandObject createCommand() {
+		return new AccountCommandObject();
 	}
 	
-	@RequestMapping(value="/create/{userId}", method=RequestMethod.POST)
-	public String accountCreatePost(@PathVariable("userId") Long userId, @ModelAttribute @Valid Account account, BindingResult result, Model model) {
+	@RequestMapping(value="/createOrEdit", method=RequestMethod.GET)
+	public String accountCreateOrEdit(
+			@RequestParam(value = "id", required = false) Long id,
+			@RequestParam(value = "userId", required = false) Long userId,
+			Model model) throws AccountNotFoundException, UserNotFoundException {
 
-		if(result.hasErrors()) {
-			return "account/accountCreate";
+		Account account = null;
+		if(id != null) {
+			account = accountManager.findByIdWithUser(id);
+			if(account == null) {
+				throw new AccountNotFoundException();
+			}
+		} else if(id == null && userId == null){
+			throw new UserNotFoundException();
+		} else {
+			account = new Account();
+			User user = userManager.findById(userId);
+			if(user == null) {
+				throw new UserNotFoundException();
+			}
+			account.setUser(user);
 		}
 
-		User user = userManager.findById(userId);
-		account.setUser(user);
+		AccountCommandObject command = this.createCommand();
+		command.setAccount(account);
 
-		accountManager.saveOrUpdate(account);
+		model.addAttribute("command", command);
+		return "account/accountCreateOrEdit";
+	}
+	
+	@RequestMapping(value="/createOrEdit", method=RequestMethod.POST)
+	public String accountCreateOrEditPost(
+		@ModelAttribute("command") @Valid AccountCommandObject command,
+		BindingResult result,
+		Model model) {
 
-		return "redirect:/users/" + userId;
+		if(result.hasErrors()) {
+			return "account/accountCreateOrEdit";
+		}
+
+		accountManager.saveOrUpdate(command.getAccount());
+
+		return "redirect:/users/" + command.getAccount().getUser().getId();
+	}
+
+	@ExceptionHandler({UserNotFoundException.class})
+	public String userNotFoundExceptionHandler() {
+		return "exceptions/userNotFound";
+	}
+
+	@ExceptionHandler({AccountNotFoundException.class})
+	public String accountNotFoundExceptionHandler() {
+		return "exceptions/accountNotFound";
 	}
 }
