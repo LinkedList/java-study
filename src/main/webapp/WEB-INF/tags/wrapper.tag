@@ -33,6 +33,7 @@
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">
 			<li class="nav navbar-text"><fmt:formatDate type="date" value="${date}" /></li>
+			<li class="nav navbar-text">Users in database: <c:out value="${usersSize}" /></li>
 			<c:if test="${pageContext.request.userPrincipal.name != null}">
 				<li><a href="javascript:formSubmit()" > Logout</a></li>  
 			</c:if>
