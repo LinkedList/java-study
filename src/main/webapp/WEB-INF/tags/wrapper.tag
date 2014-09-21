@@ -1,5 +1,7 @@
 <%@tag description="Layout wrapper" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -30,9 +32,10 @@
 			<li><a href="<c:url value="/admin/accounts/" />">Accounts</a></li>
 		    </ul>
 		    <ul class="nav navbar-nav navbar-right">
+			<li class="nav navbar-text"><fmt:formatDate type="date" value="${date}" /></li>
 			<c:if test="${pageContext.request.userPrincipal.name != null}">
 				<li><a href="javascript:formSubmit()" > Logout</a></li>  
-				</c:if>
+			</c:if>
 		    </ul>
 		</nav>
 	    </div>
