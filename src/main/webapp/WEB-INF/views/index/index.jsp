@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page isELIgnored="false"%>
 <t:wrapper>
 	<div class="jumbotron">
@@ -11,7 +12,7 @@
 		</div>
 	</div>
 	<div class="container">
-		<h1>Welcome to the Internet</h1>
+	    <h1><spring:message code="index.welcome" text="default text" /></h1>
 		<ul class="nav nav-pills nav-stacked">
 			<li><a href="<c:url value="/hello" />">Hello World</a></li>
 			<li><a href="<c:url value="/hello/Martin" />">Hello Martin</a></li>
