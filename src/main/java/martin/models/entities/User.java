@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -35,6 +36,9 @@ public class User {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Account> accounts = new LinkedList<>();
+
+	@OneToOne(fetch = FetchType.EAGER)
+	private Book favouriteBook;
 
 	public User() {}
 
@@ -76,6 +80,14 @@ public class User {
 
 	public void setAccounts(List<Account> accounts) {
 		this.accounts = accounts;
+	}
+
+	public Book getFavouriteBook() {
+		return favouriteBook;
+	}
+
+	public void setFavouriteBook(Book favouriteBook) {
+		this.favouriteBook = favouriteBook;
 	}
 
 	@Override

@@ -28,6 +28,7 @@
 		<a class="btn btn-primary" href="<c:url value="/books/createOrEdit">
 			   <c:param name="userId" value="${user.id}" />
 		   </c:url>">Create new book</a>
+		<a class="btn btn-primary" href="<c:url value="/users/editFavourites/${user.id}" />">Pick favourite</a>
 		<table class="table">
 			<thead>
 				<tr>
@@ -37,7 +38,14 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${user.books}" var="book">
-					<tr>
+					<c:choose>
+						<c:when test="${book.id == user.favouriteBook.id}">
+							<tr class="success">
+						</c:when>
+						<c:otherwise>
+							<tr>
+						</c:otherwise>
+					</c:choose>
 						<td><c:out value="${book.title}" /></td>
 						<td><c:out value="${book.description}" /></td>
 						<td>
