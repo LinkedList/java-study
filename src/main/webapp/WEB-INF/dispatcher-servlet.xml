@@ -55,9 +55,16 @@ http://www.springframework.org/schema/mvc http://www.springframework.org/schema/
 	</bean>
  
  	<mvc:interceptors>
-		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-			<property name="paramName" value="language" />
-		</bean>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="language" />
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="martin.interceptors.BookCountInterceptor" />
+		</mvc:interceptor>
 	</mvc:interceptors>
 
 	<bean id="messageSource"
