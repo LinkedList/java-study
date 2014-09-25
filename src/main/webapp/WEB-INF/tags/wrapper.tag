@@ -36,6 +36,7 @@
 			<li class="nav navbar-text">Users in database: <c:out value="${usersSize}" /></li>
 			<li class="nav navbar-text">Books in database: <c:out value="${bookCount}" /></li>
 			<c:if test="${pageContext.request.userPrincipal.name != null}">
+				<li class="nav navbar-text"><c:out value="${pageContext.request.userPrincipal.name}"/></li>  
 				<li><a href="javascript:formSubmit()" > Logout</a></li>  
 			</c:if>
 		    </ul>
